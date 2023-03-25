@@ -3,10 +3,15 @@ name: FOAM-FSI
 on: push
   
 jobs:
-    build:
+    prepare:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
+
+    build:
+        needs: prepare
+        runs-on: ubuntu-latest
+        steps:
             - name: initialize git submodulesa
               run: |
                     (cd src/fsi && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
