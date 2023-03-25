@@ -11,14 +11,10 @@ jobs:
               run: |
                     git checkout .
                     git submodule update --init --recursive
-            - name: cppcheck
-              run: |
                     (cd src/fsi && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
                     (cd src/RBFMeshMotionSolver && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
                     (cd src/tests && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
                     (cd applications && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
-            - name: initialize dependencies
-              run: |
                     # foam-extend
                     cd /home
                     tar xf foam-extend-3.2.tar.gz && rm foam-extend-3.2.tar.gz
@@ -44,8 +40,6 @@ jobs:
                     # yaml-cpp
                     ln -s /home/yaml-cpp-release-0.5.3 yaml-cpp
                     cp yaml-cpp/install/lib/libyaml-cpp* ${FOAM_LIBBIN}/
-            - name: elemental
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/thirdParty/elemental
                     mkdir -p build install && cd build
@@ -67,12 +61,8 @@ jobs:
                     cd ..
                     cp install/lib/*.so* $FOAM_LIBBIN/
                     rm -rf build
-            - name: precice
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/thirdParty && ./compile_precice
-            - name: boundary conditions
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     wmakeLnInclude src/boundaryConditions
                     wmakeLnInclude src/fvSchemes
@@ -80,58 +70,33 @@ jobs:
                     wmakeLnInclude src/RBFMeshMotionSolver
                     wmakeLnInclude src/SRFModelAbs
                     wmake libso src/boundaryConditions
-            - name: schemes
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     wmake libso src/fvSchemes
-            - name: fsi
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     wmake libso src/fsi
-            - name: radial basis function mesh motion solver
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     wmake libso src/RBFMeshMotionSolver
-            - name: solvers
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd applications/solvers/fsi && wmake all
                     cd ../ && wmake unsteadyPUCoupledFoam
-            - name: test app
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/tests && wmake all
-            - name: testsuite-sdc
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/tests && python runTests.py testsuite-sdc
-            - name: testsuite-sdc-fsi
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/tests && python runTests.py testsuite-sdc-fsi
-            - name: testsuite-rbf
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/tests && python runTests.py testsuite-rbf
                     mpirun -np 4 --allow-run-as-root testsuite-rbf
-            - name: testsuite-spacemapping
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/tests && python runTests.py testsuite-spacemapping
-            - name: testsuite-fsi
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/tests && python runTests.py testsuite-fsi
-            - name: testsuite-dealii
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/tests && python runTests.py testsuite-dealii
-            - name: tutorials
-              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/tests/tutorials && python testsuite.py
-            - name: cleanup
-              run: rm -rf * .git* .travis.yml .uncrustify.cfg
+                    rm -rf * .git* .travis.yml .uncrustify.cfg
     
     debug:
         runs-on: davidsblom/foam-fsi:debug
