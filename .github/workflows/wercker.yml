@@ -7,6 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: initialize git submodules
+              uses: docker://avidsblom/foam-fsi:latest
               run: |
                     git checkout .
                     git submodule update --init --recursive
@@ -133,7 +134,7 @@ jobs:
               run: rm -rf * .git* .travis.yml .uncrustify.cfg
     
     debug:
-        runs-on: ubuntu-latest
+        runs-on: davidsblom/foam-fsi:debug
         steps:
             - name: initialize git submodules
               run: |
