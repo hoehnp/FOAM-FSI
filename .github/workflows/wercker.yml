@@ -1,5 +1,6 @@
 name: FOAM-FSI
 
+jobs:
     build:
         steps:
             - script:
