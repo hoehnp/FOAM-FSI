@@ -9,6 +9,8 @@ jobs:
             - uses: actions/checkout@v2
             - name: cppcheck
               run: |
+                    (pwd)
+                    (ls)
                     (cd src/fsi && cppcheck -j `nproc` --enable=performance,portability .)
                     (cd src/RBFMeshMotionSolver && cppcheck -j `nproc` --enable=performance,portability .)
                     (cd src/tests && cppcheck -j `nproc` --enable=performance,portability .)
