@@ -9,7 +9,7 @@ jobs:
             - name: install packages
               run: |
                    sudo apt-get update
-                   sudo apt-get install cppcheck build-essential binutils-dev cmake flex zlib1g-dev libncurses5-dev libiberty-dev libxt-dev rpm mercurial graphviz python python-dev
+                   sudo apt-get install cppcheck build-essential binutils-dev cmake flex zlib1g-dev libncurses5-dev libiberty-dev libxt-dev rpm mercurial graphviz
             - uses: actions/checkout@v2
             - name: cppcheck
               run: |
