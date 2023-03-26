@@ -8,12 +8,11 @@ jobs:
         steps:
             - name: install packages
               run: |
-                   sudo apt-get install cppcheck
+                   sudo apt-get update
+                   sudo apt-get install cppcheck build-essential binutils-dev cmake flex zlib1g-dev libncurses5-dev libiberty-dev libxt-dev rpm mercurial graphviz python python-dev
             - uses: actions/checkout@v2
             - name: cppcheck
               run: |
-                    (pwd)
-                    (ls)
                     (cd src/fsi && cppcheck -j `nproc` --enable=performance,portability .)
                     (cd src/RBFMeshMotionSolver && cppcheck -j `nproc` --enable=performance,portability .)
                     (cd src/tests && cppcheck -j `nproc` --enable=performance,portability .)
@@ -21,10 +20,14 @@ jobs:
             - name: initialize dependencies
               run: |
                     # foam-extend
-                    cd /home
-                    tar xf foam-extend-3.2.tar.gz && rm foam-extend-3.2.tar.gz
-                    source foam-extend-3.2/etc/prefs.sh && source foam-extend-3.2/etc/bashrc
-    
+                    cd $HOME
+                    mkdir foam
+                    cd foam
+                    git clone git://git.code.sf.net/p/foam-extend/foam-extend-3.2 foam-extend-3.2
+                    cd foam-extend-3.2
+                    source etc/bashrc
+                    ./Allwmake.firstInstall
+
                     # boost
                     cd $WERCKER_SOURCE_DIR/src/thirdParty
                     ln -s /home/boost_1_61_0 boost
