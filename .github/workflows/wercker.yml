@@ -12,12 +12,18 @@ jobs:
         needs: prepare
         runs-on: ubuntu-latest
         steps:
-            - name: initialize git submodulesa
+            - name: initialize git submodules
+              run: |
+                   git checkout .
+                   git submodule update --init --recursive
+            - name: cppcheck
               run: |
                     (cd src/fsi && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
                     (cd src/RBFMeshMotionSolver && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
                     (cd src/tests && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
                     (cd applications && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
+            - name: initialize dependencies
+              run: |
                     # foam-extend
                     cd /home
                     tar xf foam-extend-3.2.tar.gz && rm foam-extend-3.2.tar.gz
@@ -43,6 +49,8 @@ jobs:
                     # yaml-cpp
                     ln -s /home/yaml-cpp-release-0.5.3 yaml-cpp
                     cp yaml-cpp/install/lib/libyaml-cpp* ${FOAM_LIBBIN}/
+            - name: elemental
+              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/thirdParty/elemental
                     mkdir -p build install && cd build
@@ -64,6 +72,8 @@ jobs:
                     cd ..
                     cp install/lib/*.so* $FOAM_LIBBIN/
                     rm -rf build
+            - name: precice
+              run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd src/thirdParty && ./compile_precice
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
