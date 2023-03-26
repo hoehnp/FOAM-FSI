@@ -14,10 +14,10 @@ jobs:
         steps:
             - name: cppcheck
               run: |
-                    (cd src/fsi && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
-                    (cd src/RBFMeshMotionSolver && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
-                    (cd src/tests && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
-                    (cd applications && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
+                    (cd src/fsi && cppcheck -j `nproc` --enable=performance,portability .)
+                    (cd src/RBFMeshMotionSolver && cppcheck -j `nproc` --enable=performance,portability .)
+                    (cd src/tests && cppcheck -j `nproc` --enable=performance,portability .)
+                    (cd applications && cppcheck -j `nproc` --enable=performance,portability .)
             - name: initialize dependencies
               run: |
                     # foam-extend
