@@ -3,15 +3,11 @@ name: FOAM-FSI
 on: push
   
 jobs:
-    prepare:
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v2
-
     build:
         needs: prepare
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v2
             - name: cppcheck
               run: |
                     (cd src/fsi && cppcheck -j `nproc` --enable=performance,portability .)
