@@ -12,10 +12,6 @@ jobs:
         needs: prepare
         runs-on: ubuntu-latest
         steps:
-            - name: initialize git submodules
-              run: |
-                   git checkout .
-                   git submodule update --init --recursive
             - name: cppcheck
               run: |
                     (cd src/fsi && cppcheck -j `nproc` --error-exitrun=1 --enable=performance,portability .)
