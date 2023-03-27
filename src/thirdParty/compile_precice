@@ -19,6 +19,7 @@ export LIBRARY_PATH=$FOAM_LIBBIN
 export LD_LIBRARY_PATH=$FOAM_LIBBIN
 export PETSC_DIR=`pwd`/petsc
 export PETSC_ARCH=x86_64
+export USER=$(whoami)
 
 # Build preCICE
 cd precice
