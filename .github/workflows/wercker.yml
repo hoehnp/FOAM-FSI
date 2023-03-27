@@ -46,8 +46,6 @@ jobs:
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     mkdir -p src/thirdParty/elemental
                     cd src/thirdParty/elemental
-                    git clone https://github.com/elemental/Elemental .
-                    ls 
             - name: precice
               run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
