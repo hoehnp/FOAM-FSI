@@ -4,6 +4,9 @@ set -euox pipefail
 
 # Define which versions of the different packages are used
 
+source /home/foam-extend-3.2/etc/prefs.sh 
+source /home/foam-extend-3.2/etc/bashrc
+
 mkdir -p ${FOAM_LIBBIN}
 mkdir -p ${FOAM_APPBIN}
 
