@@ -6,6 +6,7 @@ set -euox pipefail
 
 export FOAM_INST_DIR=/home/foam-extend-3.2
 export WM_PROJECT_INST_DIR=/home/foam-extend-3.2
+export WM_OSTYPE=POSIX
 export USER=root
 (pushd /home/foam-extend-3.2 && source etc/bashrc)
 popd
