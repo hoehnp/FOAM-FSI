@@ -5,7 +5,7 @@ on: push
 jobs:
     build:
         runs-on: ubuntu-18.04
-        container: davidsblom:foam-fsi
+        container: davidsblom/foam-fsi
         steps:
             - name: install packages
               run: |
