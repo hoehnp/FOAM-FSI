@@ -25,7 +25,7 @@ jobs:
                     source foam-extend-3.2/etc/prefs.sh && source foam-extend-3.2/etc/bashrc
 
                     # boost
-                    cd /home
+                    cd $GITHUB_WORKSPACE/src/thirdParty
                     ln -s /home/boost_1_61_0 boost
                     cp boost/stage/lib/* $FOAM_LIBBIN/
     
@@ -47,10 +47,7 @@ jobs:
             - name: elemental
               run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
-                    mkdir -p src/thirdParty/elemental
-                    cd src/thirdParty/elemental
-                    git clone https://github.com/elemental/Elemental .
-                    ls 
+                    cd $GITHUB_WORKSPACE/src/thirdParty/elemental
                     mkdir -p build install && cd build
     
                     cmake \
