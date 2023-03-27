@@ -17,13 +17,9 @@ jobs:
             - name: initialize dependencies
               run: |
                     # foam-extend
-                    cd $HOME
-                    mkdir foam
-                    cd foam
-                    git clone git://git.code.sf.net/p/foam-extend/foam-extend-3.2 foam-extend-3.2
-                    cd foam-extend-3.2
-                    source etc/bashrc
-                    ./Allwmake.firstInstall
+                    cd /home
+                    tar xf foam-extend-3.2.tar.gz && rm foam-extend-3.2.tar.gz
+                    source foam-extend-3.2/etc/prefs.sh && source foam-extend-3.2/etc/bashrc
 
                     # boost
                     cd $WERCKER_SOURCE_DIR/src/thirdParty
