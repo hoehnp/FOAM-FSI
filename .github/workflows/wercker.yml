@@ -40,7 +40,8 @@ jobs:
     
                     # yaml-cpp
                     ln -s /home/yaml-cpp-release-0.5.3 yaml-cpp
-                    cp yaml-cpp/install/lib/libyaml-cpp* ${FOAM_LIBBIN}/
+                    #cp yaml-cpp/install/lib/libyaml-cpp* ${FOAM_LIBBIN}/
+
             - name: elemental
               run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
