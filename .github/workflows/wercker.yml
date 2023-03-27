@@ -48,25 +48,6 @@ jobs:
                     cd src/thirdParty/elemental
                     git clone https://github.com/elemental/Elemental .
                     ls 
-                    mkdir -p build install && cd build
-    
-                    cmake \
-                        -D CMAKE_INSTALL_PREFIX=`pwd`/../install \
-                        -D INSTALL_PYTHON_PACKAGE=OFF \
-                        -D CMAKE_BUILD_TYPE=Release \
-                        -D EL_DISABLE_PARMETIS=TRUE \
-                        -D CMAKE_CXX_COMPILER=mpicxx \
-                        -D CMAKE_C_COMPILER=mpicc \
-                        -D CMAKE_Fortran_COMPILER=mpif90 \
-                        -D EL_DISABLE_SCALAPACK=TRUE \
-                        -D GFORTRAN_LIB=/usr/lib/gcc/x86_64-linux-gnu/6 \
-                        ..
-    
-                    make -j `nproc`
-                    make install
-                    cd ..
-                    cp install/lib/*.so* $FOAM_LIBBIN/
-                    rm -rf build
             - name: precice
               run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
