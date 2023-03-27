@@ -48,6 +48,7 @@ jobs:
               run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
                     cd $GITHUB_WORKSPACE/src/thirdParty/elemental
+                    git clone https://github.com/elemental/Elemental .
                     mkdir -p build install && cd build
     
                     cmake \
