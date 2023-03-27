@@ -4,6 +4,7 @@ set -euox pipefail
 
 # Define which versions of the different packages are used
 
+export USER=$(whoami)
 source /home/foam-extend-3.2/etc/prefs.sh 
 source /home/foam-extend-3.2/etc/bashrc
 
@@ -19,7 +20,6 @@ export LIBRARY_PATH=$FOAM_LIBBIN
 export LD_LIBRARY_PATH=$FOAM_LIBBIN
 export PETSC_DIR=`pwd`/petsc
 export PETSC_ARCH=x86_64
-export USER=$(whoami)
 
 # Build preCICE
 cd precice
