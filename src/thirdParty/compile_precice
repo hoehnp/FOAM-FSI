@@ -4,10 +4,8 @@ set -euox pipefail
 
 # Define which versions of the different packages are used
 
-export USER=$(whoami)
-source /home/foam-extend-3.2/etc/prefs.sh 
-source /home/foam-extend-3.2/etc/bashrc
-
+(pushd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
+popd
 mkdir -p ${FOAM_LIBBIN}
 mkdir -p ${FOAM_APPBIN}
 
