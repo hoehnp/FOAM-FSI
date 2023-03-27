@@ -5,12 +5,8 @@ on: push
 jobs:
     build:
         runs-on: ubuntu-18.04
-        container: davidsblom/foam-fsi
+        container: davidsblom/foam-fsi:debug
         steps:
-            - name: install packages
-              run: |
-                   sudo apt-get update
-                   sudo apt-get install cppcheck build-essential binutils-dev cmake flex zlib1g-dev libncurses5-dev libiberty-dev libxt-dev rpm mercurial graphviz
             - uses: actions/checkout@v2
             - name: cppcheck
               run: |
