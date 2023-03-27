@@ -43,7 +43,7 @@ jobs:
                     cp yaml-cpp/install/lib/libyaml-cpp* ${FOAM_LIBBIN}/
             - name: elemental
               run: |
-                    (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
+                    (cd /home/foam-extend-3.2 && source etc/bashrc)
             - name: precice
               run: |
                     (cd /home/foam-extend-3.2 && source etc/prefs.sh && source etc/bashrc)
